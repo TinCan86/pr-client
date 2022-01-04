@@ -1,5 +1,4 @@
 import useSWR from "swr";
-import apiKey from "../variables/apiKey";
 import { useApplicationConfig } from "./config";
 
 // Define type for data
