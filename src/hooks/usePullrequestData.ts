@@ -9,6 +9,8 @@ export function usePullrequestData() {
 
   const url = config != null ? `${config.api_url}` : null;
 
+  console.log("URL to fetch: ", url)
+
   // TODO: Define the respone data to a data model
   const { data, error, isValidating } = useSWR<any, Error>(url, {
     refreshInterval: 0, // Prevents the auto-revalidation
@@ -19,6 +21,8 @@ export function usePullrequestData() {
   if (error) {
     console.error(error);
   }
+
+  console.log("DATA: ", data)
 
   return { data, error, isValidating };
 }
