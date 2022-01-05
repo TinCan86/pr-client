@@ -1,30 +1,34 @@
-import React, { FunctionComponent, useState, useEffect } from "react";
+import React, {
+   FunctionComponent,
+   useState,
+   useEffect,
+} from "react";
+import Container from "../components/Container";
 import Title from "../components/Title";
 //import { getPullRequestsFromRepos, getGitHubRepos } from "../utils/api";
 import { Project } from "../models/index";
-import { usePullrequestData } from "../hooks/usePullrequestData";
+import repoData from "../tests/repo";
 
 const LandingView: FunctionComponent = () => {
   //const { data, error } = usePullrequestData();
   const [data, setData] = useState<Project[]>([]);
 
   useEffect(() => {
-    fetch("https://calm-wave-29148.herokuapp.com/pullrequests")
-      .then(response => response.json())
-      .then(data => {
-        setData(data)
-      })
-      .catch(err => console.log(err))
-  }, [])
+    setData(repoData);
+  }, [repoData]);
 
-  console.log("Data: ", data)
+  // useEffect(() => {
+  //   fetch("https://calm-wave-29148.herokuapp.com/pullrequests")
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       setData(data)
+  //     })
+  //     .catch(err => console.log(err))
+  // }, [])
+
+  console.log("Data: ", data);
 
   if (!data) return <p>Loading</p>;
-
-  // if (error != null) return <p>error: {error}</p>;
-
-  // const filtered = JSON.stringify(openPrs, null, 2);
-  // console.log(filtered);
 
   // const filterDevices = devices.filter((device) => {
   //   if (nameFilter != null) {
@@ -36,18 +40,25 @@ const LandingView: FunctionComponent = () => {
   //   }
   // });
 
-  return (
-    <React.Fragment>
-      <Title>PR Data in ImBox</Title>
-      {data.map((item: Project) => {
-        <div>
+  const dataList = data.map((item, index) => {
+    return (
+      <div key={index}>
         <p>{item.Title}</p>
         <p>{item.Status}</p>
-        <p>{item.PullRequestNumber}</p>
+        <p>{item.PullRequestNumber.toString()}</p>
         <p>{item.Url}</p>
-        </div>
-      })}
-    </React.Fragment>
+      </div>
+    );
+  });
+
+  return (
+    <Container>
+      <div>
+        {" "}
+        <Title>PR Data in ImBox </Title>
+        {dataList}
+      </div>
+    </Container>
   );
 };
 
