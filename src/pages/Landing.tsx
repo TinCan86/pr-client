@@ -1,11 +1,12 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import Title from "../components/Title";
+import { Project } from '../models'
 //import { getPullRequestsFromRepos, getGitHubRepos } from "../utils/api";
 import axios from 'axios';
 
 const LandingView: FunctionComponent = () => {
   //const { data, error } = usePullrequestData();
-  const [data, setData] = useState({ hits: [] });
+  const [data, setData] = useState<Project[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,7 +14,7 @@ const LandingView: FunctionComponent = () => {
         'https://calm-wave-29148.herokuapp.com/pullrequests',
       );
       console.log(result);
-      
+
       setData(result.data);
     };
 
