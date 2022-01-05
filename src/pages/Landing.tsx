@@ -9,7 +9,7 @@ const LandingView: FunctionComponent = () => {
   const [data, setData] = useState<Project[]>([]);
 
   useEffect(() => {
-    fetch("http://calm-wave-29148.herokuapp.com/pullrequests")
+    fetch("https://calm-wave-29148.herokuapp.com/pullrequests")
       .then(response => response.json())
       .then(data => {
         setData(data)
