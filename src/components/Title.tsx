@@ -6,19 +6,15 @@ type Props = {};
 
 const Title: FunctionComponent<Props> = ({ children }) => {
   const style = css`
-    position: absolute;
-    top: 0;
-
+    text-align: center;
     color: #fff;
-    font-size: 32px;
-    z-index: 1;
-
-    @media screen and (min-width: 1367px) {
-      font-size: 62px;
-    }
+    font-size: 82px;
+    margin-top: 0px;
   `;
 
-  return <h1 css={style}>{children}</h1>;
+  return <h1 css={style}>
+    <img src='logotype-white.svg'/>
+{children}</h1>;
 };
 
 export default Title;
