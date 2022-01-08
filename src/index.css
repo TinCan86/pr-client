@@ -11,3 +11,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+@font-face {
+  font-family: "Brezel-Bold";
+  src: url("fonts/BrezelGrotesk-Bold.woff") format("woff"); /* Pretty Modern Browsers */
+}
+
+@font-face {
+  font-family: "Brezel-Medium";
+  src: url("fonts/BrezelGrotesk-Medium.woff") format("woff"); /* Pretty Modern Browsers */
+}
+
+@font-face {
+  font-family: "Brezel-Light";
+  src: url("fonts/BrezelGrotesk-Light.woff") format("woff"); /* Pretty Modern Browsers */
+}
+
+@font-face {
+  font-family: "Brezel-Regular";
+  src: url("fonts/BrezelGrotesk-Regular.woff") format("woff"); /* Pretty Modern Browsers */
+}

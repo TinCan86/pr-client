@@ -31,18 +31,35 @@ const TableContent: FunctionComponent<Props> = ({
     }
 
     td {
+      font-family: Brezel-Regular;
+
         padding: 12px 15px;
 
-        &:nth-of-type(1), &:nth-of-type(2) {
+        &:nth-of-type(1), &:nth-of-type(2), &:nth-of-type(3) {
             text-align: left;
         }
+    }
+
+    a { 
+      text-decoration: none;
+      border-radius: 5px;
+      line-height: 20px;
+      color: white;
+      background-color: ${colors.purple};
+      padding: 8px;
+      font-size: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+      transition: 0.2s all;
+
+      &:hover {
+        background-color: ${colors.darkPurple};
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
+
+      }
     }
   `;
 
   const cleanUrl = (url: string): string => {
-    console.log(url);
-    const test = url.split('/');
-    console.log("After split: ", test[5])
     return url.replace('api.', '').replace('/repos','').replace('pulls','pull');
   }
 
@@ -57,7 +74,7 @@ const TableContent: FunctionComponent<Props> = ({
         <td>{repositoryName(url)}</td>
         <td>{title}</td>
         <td>{status}</td> 
-        <td><a href={cleanUrl(url)} target="_blank" >Link</a></td>
+        <td><a href={cleanUrl(url)} target="_blank" >Review</a></td>
     </tr>
   );
 };

@@ -9,12 +9,13 @@ const Container: FunctionComponent<Props> = ({ children }) => {
   const style = css`
     background-color: ${colors.purple};
     width: 100%;
-    height: 100vh;
+    height: 80vh;
     max-height: 100vh;
     display: flex;
     flex: wrap;
     justify-content: center;
     align-items: center;
+    padding-top: 20vh;
   `;
 
   return <div css={style}>{children}</div>;
