@@ -6,6 +6,7 @@ import colors from "../variables/colors"
 type Props = {
   title: string;
   url: string;
+  repository: string;
   pullRequestNumber: string;
   status: string;
   index: number;
@@ -15,6 +16,7 @@ const TableContent: FunctionComponent<Props> = ({
   children,
   title,
   url,
+  repository,
   pullRequestNumber,
   status,
   index
@@ -63,15 +65,10 @@ const TableContent: FunctionComponent<Props> = ({
     return url.replace('api.', '').replace('/repos','').replace('pulls','pull');
   }
 
-  const repositoryName = (url: string) => {
-      const name = url.split('/')
-      return name[5]
-  }
-
   return (
     <tr key={index} css={style}>
         <td>{pullRequestNumber}</td>
-        <td>{repositoryName(url)}</td>
+        <td>{repository}</td>
         <td>{title}</td>
         <td>{status}</td> 
         <td><a href={cleanUrl(url)} target="_blank" >Review</a></td>

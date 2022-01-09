@@ -3,37 +3,34 @@ import { css, jsx } from "@emotion/react";
 import React, { FunctionComponent, useState, useEffect } from "react";
 import Container from "../components/Container";
 import Table from "../components/Table";
-import Title from "../components/Header";
-import H2 from "../components/H2";
 import TableContent from "../components/TableContent";
+import Spinner from "../components/Spinner";
+import Search from "../components/Search";
 
 //import { getPullRequestsFromRepos, getGitHubRepos } from "../utils/api";
 import { Project } from "../models/index";
 import repoData from "../tests/repo";
 
 const contentStyle = css`
-  height: 400px;
-  max-height: 400px;
+  margin: auto;
+  max-height: 520px;
   overflow-y: auto;
+  width: 842px;
   border-radius: 5px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
 
-  /* width */
   &::-webkit-scrollbar {
     width: 2px;
   }
 
-  /* Track */
   &::-webkit-scrollbar-track {
     background: transparent;
   }
 
-  /* Handle */
   &::-webkit-scrollbar-thumb {
     background: #634aaf;
   }
 
-  /* Handle on hover */
   &::-webkit-scrollbar-thumb:hover {
     background: #634aaf;
   }
@@ -41,39 +38,60 @@ const contentStyle = css`
 
 const LandingView: FunctionComponent = () => {
   //const { data, error } = usePullrequestData();
-  const [data, setData] = useState<Project[]>([]);
-
-  useEffect(() => {
-    setData(repoData);
-  }, [repoData]);
+  const [data, setData] = useState<Project[] | null>(null);
+  const [nameFilter, setNameFilter] = React.useState<string | null>(null);
 
   // useEffect(() => {
-  //   fetch("https://calm-wave-29148.herokuapp.com/pullrequests")
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       setData(data)
-  //     })
-  //     .catch(err => console.log(err))
-  // }, [])
+  //   setData(repoData);
+  // }, [repoData]);
+
+  useEffect(() => {
+    fetch("https://calm-wave-29148.herokuapp.com/pullrequests")
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   console.log("Data: ", data);
 
-  if (!data) return <p>Loading</p>;
+  if (!data)
+    return (
+      <Container>
+        <Spinner />
+      </Container>
+    );
 
-  // const filterDevices = devices.filter((device) => {
-  //   if (nameFilter != null) {
-  //     return device.xot_id != null
-  //       ? device.device_name?.toLowerCase().includes(nameFilter)
-  //       : false;
-  //   } else {
-  //     return true;
-  //   }
-  // });
+  const filterDevices = data.filter((item) => {
+    const repositoryName = (url: string) => {
+      const name = url.split("/");
+      return name[5];
+    };
 
-  const dataList = data.map((item, index) => {
+    const repoName = repositoryName(item.Url);
+
+    if (nameFilter != null) {
+      return repoName != null
+        ? repoName?.toLowerCase().includes(nameFilter)
+        : false;
+    } else {
+      return true;
+    }
+  });
+
+  const dataList = filterDevices.map((item, index) => {
+    const repositoryName = (url: string) => {
+      const name = url.split("/");
+      return name[5];
+    };
+
+    const repoName = repositoryName(item.Url);
+
     return (
       <TableContent
         index={index}
+        repository={repoName}
         title={item.Title}
         url={item.Url}
         pullRequestNumber={item.PullRequestNumber.toString()}
@@ -84,8 +102,22 @@ const LandingView: FunctionComponent = () => {
 
   return (
     <Container>
+      <Search
+        value={nameFilter || ""}
+        placeholder="Search for repository..."
+        onChange={(e: any) => {
+          const nextValue = e.target.value;
+          setNameFilter(nextValue === "" ? null : nextValue);
+        }}
+      />
       <div css={contentStyle}>
-        <Table>{dataList}</Table>
+        {data === null ? (
+          <Spinner />
+        ) : (
+          <div>
+            <Table>{dataList}</Table>
+          </div>
+        )}
       </div>
     </Container>
   );

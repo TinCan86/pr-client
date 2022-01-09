@@ -10,7 +10,7 @@ const Table: FunctionComponent<Props> = ({ children }) => {
     margin: 0px 0 0px 0;
     font-size: 0.9em;
     font-family: sans-serif;
-    min-width: 400px;
+    width: 840px;
     background-color: white;
     position: relative;
     border-collapse: collapse;

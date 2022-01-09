@@ -11,8 +11,6 @@ const Container: FunctionComponent<Props> = ({ children }) => {
     width: 100%;
     height: 80vh;
     max-height: 100vh;
-    display: flex;
-    flex: wrap;
     justify-content: center;
     align-items: center;
     padding-top: 20vh;
