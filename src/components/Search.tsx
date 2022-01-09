@@ -22,11 +22,10 @@ const Search: FunctionComponent<Props> = (props) => {
   `;
 
   const componentStyle = css`
-  margin: auto;
-
-  width: 840px;
+    margin: auto;
+    width: 840px;
     margin-top: ${props.noMargin ? "0px" : "10px"};
-    margin-bottom: 20px;;
+    margin-bottom: 20px; ;
   `;
 
   const inputStyle = css`
@@ -34,7 +33,7 @@ const Search: FunctionComponent<Props> = (props) => {
   font-size: 13px;
   border-radius: 5px;
   font-family: Brezel-Bold;
-  border: solid 1px #bbb8b8;
+  border: solid 1px #fff;
   padding: 0 0 0 10px;
   width: 100%;
   line-height: 46px;

@@ -94,7 +94,8 @@ const Spinner: FunctionComponent<Props> = ({ children }) => {
     }
 
     p {
-      font-family: Brezel-Light;
+      margin-top: 35px;
+      font-family: Brezel-Bold;
       width: 100%;
       color: white;
       font-size: 16px;
@@ -112,7 +113,7 @@ const Spinner: FunctionComponent<Props> = ({ children }) => {
         <div>
           <div className="hm-spinner"></div>
         </div>
-        <p>Loading...</p>
+        <p>Loading..</p>
       </div>
     </React.Fragment>
   );

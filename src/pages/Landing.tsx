@@ -11,6 +11,14 @@ import Search from "../components/Search";
 import { Project } from "../models/index";
 import repoData from "../tests/repo";
 
+const paraStyle = css`
+  font-family: Brezel-Regular;
+  background-color: white;
+  margin: 0px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+`;
+
 const contentStyle = css`
   margin: auto;
   max-height: 520px;
@@ -41,9 +49,10 @@ const LandingView: FunctionComponent = () => {
   const [data, setData] = useState<Project[] | null>(null);
   const [nameFilter, setNameFilter] = React.useState<string | null>(null);
 
-  // useEffect(() => {
-  //   setData(repoData);
-  // }, [repoData]);
+  // FOR LOCAL TESTING
+  //  useEffect(() => {
+  //    setData(repoData);
+  //  }, [repoData]);
 
   useEffect(() => {
     fetch("https://calm-wave-29148.herokuapp.com/pullrequests")
@@ -115,7 +124,11 @@ const LandingView: FunctionComponent = () => {
           <Spinner />
         ) : (
           <div>
-            <Table>{dataList}</Table>
+            {dataList.length === 0 ? (
+              <p css={paraStyle}>Sorry no repos 🥲</p>
+            ) : (
+              <Table>{dataList}</Table>
+            )}
           </div>
         )}
       </div>
